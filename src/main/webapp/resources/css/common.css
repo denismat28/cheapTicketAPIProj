@@ -1,7 +1,9 @@
+
+
 body {
+    background: url(../../img/background.jpg);
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #eee;
 }
 
 .form-signin {
@@ -45,4 +47,25 @@ body {
 
 .has-error {
     color: red
+}
+
+header{
+    text-align: justify;
+    letter-spacing: 1px;
+    height: 8em;
+    padding: 2em 10%;
+}
+header h1,
+header nav {
+    display: inline-block;
+}
+header::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+.currency{
+    float: right;
+
+    box-sizing: border-box;
 }

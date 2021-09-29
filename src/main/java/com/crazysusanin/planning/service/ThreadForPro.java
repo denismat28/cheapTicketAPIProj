@@ -58,7 +58,7 @@ public class ThreadForPro {
                             System.out.println("thread working....");
                             //sending msg on email
                             try {
-                                sleep(3000);
+                                sleep(30000);
                                 Document doc = generatePDF.generatePDFByAviaTicketInfo(id);
 
                                 EmailUtils.sendMessageWithPDF(user.getEmail(), AppConstants.EMAIL_ID,
