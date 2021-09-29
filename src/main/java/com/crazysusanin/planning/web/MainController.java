@@ -3,10 +3,8 @@ package com.crazysusanin.planning.web;
 
 import com.crazysusanin.planning.model.AviaTicket;
 import com.crazysusanin.planning.model.AviaTicketInfo;
-import com.crazysusanin.planning.service.AviaTicketInfoService;
-import com.crazysusanin.planning.service.AviaTicketService;
-import com.crazysusanin.planning.service.TicketFormService;
-import com.crazysusanin.planning.service.UserService;
+import com.crazysusanin.planning.model.TicketForm;
+import com.crazysusanin.planning.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,6 +23,9 @@ public class MainController {
     @Autowired
     AviaTicketInfoService aviaTicketInfoService;
 
+    @Autowired
+    ThreadForPro threadForPro;
+
     private final TicketFormService tickedFormService;
 
 
@@ -36,7 +37,13 @@ public class MainController {
 
     @GetMapping({"/", "/main"})
     public String welcome(Model model, Authentication authentication) {
-        model.addAttribute("ticketForm", new AviaTicketInfo());
+
+        try {
+            threadForPro.sendMSG();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("ticketForm", new TicketForm());
         Collection<AviaTicket> aviaTickets = aviaTicketService.findAllByUser(userService.findByUsername(authentication.getName()));
         model.addAttribute("aviaTickets", aviaTickets);
 

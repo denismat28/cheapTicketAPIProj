@@ -4,4 +4,5 @@ import com.crazysusanin.planning.model.Role;
 
 public interface RoleService {
     Role findByType(String type);
+    Role findById(int id);
 }

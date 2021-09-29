@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class EmailUtils {
-    public static void sendMessageWithPDF(String to, String from, String subject) {
+    public static void sendMessageWithPDF(String to, String from, String subject,String filename) {
 
         Session session = Session.getInstance(AppConstants.GMAIL_PROPS, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -34,17 +34,13 @@ public class EmailUtils {
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            // Set Subject: header field
-            message.setSubject(subject);
-
-            ////////
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // Now set the actual message
-            messageBodyPart.setText("This is message body");
+            messageBodyPart.setText(subject);
 
-            // Create a multipar message
+            // Create a multipart message
             Multipart multipart = new MimeMultipart();
 
             // Set text message part
@@ -52,7 +48,6 @@ public class EmailUtils {
 
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "D:\\generate_pdf\\test.pdf";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);

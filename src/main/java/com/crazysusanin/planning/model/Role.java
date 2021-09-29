@@ -19,13 +19,4 @@ public class Role {
     private String type;
     private String description;
 
-
-    public Role(int id) {
-        this.id = id;
-    }
-
-    public Role(String type) {
-        this.type = type;
-    }
-
 }

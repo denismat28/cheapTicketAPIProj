@@ -87,11 +87,6 @@ public class TicketFormController {
         return "ticket_form";
     }
 
-
-
-
-
-
     @RequestMapping(value = "/saveTicket/{id}")
     public String saveAviaTicket(@PathVariable (name = "id") int id){
         aviaTicketService.addAviaTicket(aviaTicketInfoService.findAviaTicketInfoById(id));
@@ -110,16 +105,12 @@ public class TicketFormController {
         User user = userService.findByUsername(authentication.getName());
        //generate PDF and send message
         try {
-        Document doc = generatePDF.generatePDF(id);
+        Document doc = generatePDF.generatePDFByAviaTicket(id);
             EmailUtils.sendMessageWithPDF(user.getEmail(), AppConstants.EMAIL_ID,
-                    "CRAZY USERS: Activation");
+                    "CRAZY USERS: Your ticket", "D:\\generate_pdf\\test.pdf");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
         return "redirect:/main";
     }
-
-
 }
